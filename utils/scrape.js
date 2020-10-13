@@ -10,8 +10,8 @@ const tourPicSelector = ".tile-lazy-image__ImageRatio-sc-1815ypb-0 > div > img"
 const waitTime = 3000
 
 const scrape = async() =>{
-    await getExperienceInstances()
-
+    const tourArray = await getExperienceInstances()
+    return tourArray
 }
 
 const getExperienceInstances = async () =>{
@@ -88,7 +88,7 @@ const getExperienceInstances = async () =>{
         console.log(tourArray[j])
     }
 
-    console.log(tourArray)
+    return tourArray
 }
 
 module.exports = scrape
