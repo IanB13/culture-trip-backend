@@ -1,6 +1,9 @@
-const scrape = require("./utils/scrape")
+// Import the app
+const app = require("./app")
+// Setup server port
+const port = process.env.PORT || 5000
 
-const start = async()=>{
-    await scrape()
-}
-start()
+// Launch app to listen to specified port
+app.listen(port, function () {
+    console.log("running server on port " + port)
+})
