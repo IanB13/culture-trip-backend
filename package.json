@@ -1,0 +1,14 @@
+{
+  "name": "culture-trip-backend",
+  "version": "0.0.1",
+  "description": "Culture trip scraping backend",
+  "main": "index.js",
+  "scripts": {
+    "start":"node index.js"
+  },
+  "author": "IB",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^5.3.1"
+  }
+}
