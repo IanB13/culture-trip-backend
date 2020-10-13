@@ -7,7 +7,9 @@ const locationSchema = new mongoose.Schema({
     coordinates: {
         lat: Number,
         lng: Number
-    }
+    },
+    city: String,
+    
 })
 
 const Location = mongoose.model("Locations", locationSchema)

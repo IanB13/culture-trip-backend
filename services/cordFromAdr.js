@@ -1,6 +1,5 @@
-// uses google locations services to get    
+// uses google locations services to get coordinates from locations
 const axios = require("axios")
-const locations = require("../resources/locationScrape.json")
 require("dotenv")
 const locationSetURL = "https://maps.googleapis.com/maps/api/geocode/"
 const googleAPIkey = process.env.GOOGLE_API_KEY 
@@ -14,6 +13,7 @@ const cordFromAdr = async (address) =>{
     return {coordinates, address: response.data.results[0].formatted_address}
 }
 
+//transforms scraped string into queryable string
 const toQueryStr = (unformatedStr) =>{
     console.log(typeof(unformatedStr))
     //space to +

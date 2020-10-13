@@ -1,20 +1,19 @@
 const puppeteer = require('puppeteer');
-//Looks like it's working!!
 
-
-//constants used for web scraping listed below:
-const tourPage = 'https://theculturetrip.com/europe/united-kingdom/england/london/experiences/'
-const tourTileClass = ".ExperiencesTilestyle__ExperienceTileTitle-sc-181yexj-4"
-const infoPanel = ".Layout__MainContent-sc-1hg9uks-0"
-const tourPicSelector = ".tile-lazy-image__ImageRatio-sc-1815ypb-0 > div > img"
-const waitTime = 3000
-
-const scrape = async() =>{
-    const tourArray = await getExperienceInstances()
+const scrape = async(city) =>{
+    const tourArray = await getExperienceInstances(city)
     return tourArray
 }
 
-const getExperienceInstances = async () =>{
+const getExperienceInstances = async (city) =>{
+
+    //constants used for web scraping listed below:
+    const tourPage = `https://theculturetrip.com/europe/united-kingdom/england/${city}/experiences/`
+    const tourTileClass = ".ExperiencesTilestyle__ExperienceTileTitle-sc-181yexj-4"
+    const infoPanel = ".Layout__MainContent-sc-1hg9uks-0"
+    const tourPicSelector = ".tile-lazy-image__ImageRatio-sc-1815ypb-0 > div > img"
+    const waitTime = 3000
+
     const browser = await puppeteer.launch({
         headless: true , 
         defaultViewport: {width: 1920, height: 2000} //for larger screen shots 
@@ -32,7 +31,7 @@ const getExperienceInstances = async () =>{
         const tourArray = picArray.map((picture)=>{
             return{
                 name: picture.alt,
-                image: picture.src
+                image: picture.src,
             }
         })
         return tourArray
@@ -85,6 +84,7 @@ const getExperienceInstances = async () =>{
         }
     
         tourArray[j].address = addressString
+        tourArray[j].city = city
         console.log(tourArray[j])
     }
 

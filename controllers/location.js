@@ -2,6 +2,7 @@ const locationRouter = require("express").Router()
 const Location = require("../models/Location")
 const stuff = require("../resources/locationScrape.json")
 const addCords = require("../utils/addCords")
+const scrape = require("../utils/scrape")
 
 //gets a list of locations
 locationRouter.get("/", async (_request, response) => {
@@ -11,7 +12,8 @@ locationRouter.get("/", async (_request, response) => {
 
 //add locations to db using spreadsheet data
 locationRouter.get("/add", async (_request, response) => {
-    await Location.insertMany(stuff)
+    const locations = await scrape("london")
+    await Location.insertMany(locations)
     response.status(200).send("Success")
 })
 
