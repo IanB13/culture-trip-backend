@@ -1,8 +1,8 @@
 // uses google locations services to get coordinates from locations
 const axios = require("axios")
-require("dotenv")
+const config = require("../utils/config")
 const locationSetURL = "https://maps.googleapis.com/maps/api/geocode/"
-const googleAPIkey = process.env.GOOGLE_API_KEY 
+const googleAPIkey = config.GOOGLE_API_KEY 
 
 const cordFromAdr = async (address) =>{
     const addressStr = toQueryStr(address)

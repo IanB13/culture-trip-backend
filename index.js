@@ -1,9 +1,10 @@
 // Import the app
 const app = require("./app")
+const config = require("./utils/config")
 // Setup server port
-const port = process.env.PORT || 5000
+const port = config.PORT
 
 // Launch app to listen to specified port
-app.listen(port, function () {
+app.listen(port, () => {
     console.log("running server on port " + port)
 })

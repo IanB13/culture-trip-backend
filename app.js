@@ -1,10 +1,10 @@
 const express = require("express")
 const app = express()
-require("dotenv").config()
+const config = require('./utils/config')
 const locationRouter = require("./controllers/location")
 const mongoose = require("mongoose")
 
-const uri = process.env.MONGODB_URI
+const uri = config.MONGODB_URI
 
 mongoose.connect(uri, { useNewUrlParser: true,useUnifiedTopology: true  }).then(() => {
     console.log(`connected to mongoDB via Mongoose`)
