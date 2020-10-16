@@ -3,9 +3,10 @@ const Location = require("../models/Location")
 const stuff = require("../resources/locationScrape.json")
 const addCords = require("../utils/addCords")
 const scrape = require("../utils/scrape")
+const cors = require('cors')
 
 //gets a list of locations
-locationRouter.get("/", async (_request, response) => {
+locationRouter.get("/",cors(), async (_request, response) => {
     const locations =  await Location.find({})
     response.status(200).json(locations)
 })
