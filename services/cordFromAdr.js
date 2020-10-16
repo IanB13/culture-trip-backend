@@ -8,19 +8,24 @@ const cordFromAdr = async (address) =>{
     const addressStr = toQueryStr(address)
     const requestStr = `${locationSetURL}json?address=${addressStr}&key=${googleAPIkey}`
     const response = await axios.get(requestStr)
-    const coordinates = response.data.results[0].geometry.location
-    //console.log(response.data.results[0])
+    const cords = response.data.results[0]?.geometry?.location
+    //reformat for consistency
+    const coordinates = {
+        latitude: cords.lat,
+        longitude: cords.lng
+    }
+    if(coordinates){
     return {coordinates, address: response.data.results[0].formatted_address}
+    }
+    else return undefined
 }
 
 //transforms scraped string into queryable string
 const toQueryStr = (unformatedStr) =>{
-    console.log(typeof(unformatedStr))
     //space to +
     let str = unformatedStr.split(" ").join("+")
     //remove new line
     str = str.replace("\n","")
-    console.log(str)
     return str
 }
 
