@@ -6,6 +6,7 @@ const addCords = async () => {
     for(const location of locations){
         if(location.address && !location.cordinates){
             const cordObj = await cordFromAdr(location.address)
+            console.log(cordObj)
             await Location.findByIdAndUpdate(location._id, cordObj)
         }
      
