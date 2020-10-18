@@ -4,6 +4,9 @@ const stuff = require("../resources/locationScrape.json")
 const addCords = require("../utils/addCords")
 const scrape = require("../utils/scrape")
 const cors = require('cors')
+const config = require('../utils/config')
+const { CITIES } = require("../utils/config")
+
 
 //gets a list of locations
 locationRouter.get("/",cors(), async (_request, response) => {
@@ -13,8 +16,13 @@ locationRouter.get("/",cors(), async (_request, response) => {
 
 //add locations to db using spreadsheet data
 locationRouter.get("/add", async (_request, response) => {
-    const locations = await scrape("london")
-    await Location.insertMany(locations)
+
+    const locations = await Promise.all( CITIES.map( async (city) =>{
+        Locations = await scrape(city)
+        return ( Locations )
+    }))
+    console.log(locations.flat())
+    await Location.insertMany(locations.flat())
     response.status(200).send("Success")
 })
 
