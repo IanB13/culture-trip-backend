@@ -12,14 +12,8 @@ mongoose.connect(uri, { useNewUrlParser: true,useUnifiedTopology: true ,useFindA
     console.error(error)
 })
 
-//scraping stuff: will move 
-const scrape = require("./utils/scrape")
+app.use(express.static('build'))
 
-const start = async()=>{
-    await scrape()
-}
-//start()
-//
 app.use("/locations",locationRouter)
 
 
